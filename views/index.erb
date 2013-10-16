@@ -1,0 +1,14 @@
+<header>
+  <h1 class="logo">GDS</h1>
+  <h2 id="name">Meeting rooms</h2>
+</header>
+
+<div id="group-selection">
+  <h2>Select a view:</h2>
+
+  <ul>
+    <% @groups.each do |group| %>
+    <li><a href="/group/<%= group.id %>"><%= group.name %></a></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,22 @@
+<header>
+  <h1 class="logo">GDS</h1>
+  <h2 id="name">Meeting rooms</h2>
+  <span id="clock"></span>
+</header>
+
+<ul id="rooms">
+  <li class="available template">
+    <h3></h3>
+    <span class="event"></span>
+    <span class="availability"></span>
+  </li>
+</ul>
+<div id="status-container">
+  <div id="loading-status"></div>
+</div>
+
+<script type="text/javascript">
+$( function(){
+  MeetingRooms.init('/api/group/<%= @group %>');
+});
+</script>
