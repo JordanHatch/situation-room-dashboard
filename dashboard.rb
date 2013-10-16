@@ -10,6 +10,9 @@ require 'presenters/group_presenter'
 
 module SituationRoom
   class Dashboard < Sinatra::Base
+    use Rack::Auth::Basic, "Please login to this dashboard" do |username, password|
+      username == ENV['SITUATION_ROOM_DASHBOARD_USER'] and password == ENV['SITUATION_ROOM_DASHBOARD_PASSWORD']
+    end
 
     get '/' do
       @groups = Group.all
@@ -34,3 +37,4 @@ module SituationRoom
     end
   end
 end
+
