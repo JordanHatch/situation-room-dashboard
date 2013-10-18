@@ -8,6 +8,7 @@ module SituationRoom
       @name = atts[:name]
       @display = atts[:display]
       @calendars = atts[:calendars]
+      @show_all = atts[:show_all] || false
     end
 
     def self.all
@@ -20,17 +21,32 @@ module SituationRoom
       self.all.find {|g| g.id == id }
     end
 
+    def show_all?
+      @show_all
+    end
+
     private
     def self.groups
       @@groups ||= self.parse_config
     end
 
     def self.parse_config
-      JSON.parse(request_calendars_config)["groups"]
+      JSON.parse(user_config_or_fallback)["groups"]
     end
 
-    def self.request_calendars_config
-      ENV["SITUATION_ROOM_CONFIG"]
+    def self.user_config_or_fallback
+      ENV["SITUATION_ROOM_CONFIG"] || self.fallback_config
+    end
+
+    def self.fallback_config
+      {
+        "groups" => {
+          "all" => {
+            "name" => "All meeting rooms",
+            "show_all" => true
+          }
+        }
+      }.to_json
     end
 
   end
