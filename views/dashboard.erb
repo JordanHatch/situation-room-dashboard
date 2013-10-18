@@ -1,6 +1,6 @@
 <header>
   <h1 class="logo">GDS</h1>
-  <h2 id="name">Meeting rooms</h2>
+  <h2 id="name"><%= @group.name %></h2>
   <span id="clock"></span>
 </header>
 
@@ -17,6 +17,6 @@
 
 <script type="text/javascript">
 $( function(){
-  MeetingRooms.init('/api/group/<%= @group %>');
+  MeetingRooms.init('/api/group/<%= @group.id %>');
 });
 </script>

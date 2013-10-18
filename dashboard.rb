@@ -50,7 +50,9 @@ module SituationRoom
     end
 
     get '/group/:id' do
-      @group = params[:id]
+      @group = Group.find(params[:id])
+      not_found unless @group.present?
+
       erb :dashboard
     end
   end
