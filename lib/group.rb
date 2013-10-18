@@ -1,5 +1,3 @@
-require 'rest-client'
-
 module SituationRoom
   class Group
 
@@ -32,7 +30,7 @@ module SituationRoom
     end
 
     def self.request_calendars_config
-      RestClient.get(ENV["SITUATION_ROOM_CONFIG"]).body
+      ENV["SITUATION_ROOM_CONFIG"]
     end
 
   end
