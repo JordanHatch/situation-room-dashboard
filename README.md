@@ -7,10 +7,8 @@ Situation Room Dashboard displays the status of meeting rooms from an instance o
 The app is configured using environment variables.
 
 - `SITUATION_ROOM_API_ENDPOINT` - a URL to an instance of Situation Room
-
 - `SITUATION_ROOM_API_USER` - if required, the username to use to authenticate with Situation Room's HTTP Basic auth
 - `SITUATION_ROOM_API_PASSWORD` - if required, the password to use to authenticate with Situation Room's HTTP Basic auth
-
 - `SITUATION_ROOM_DASHBOARD_USER` - an optional username to require to access the dashboard using Basic auth
 - `SITUATION_ROOM_DASHBOARD_PASSWORD` - an optional password to require to access the dashboard using Basic auth
 
