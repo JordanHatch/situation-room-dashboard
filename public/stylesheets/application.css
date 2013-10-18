@@ -5,6 +5,7 @@ body {
   color: #fff;
   font-family: "GDS Transport Website", Helvetica, Arial, sans-serif;
   font-size: 24px;
+
 }
 
 header {
@@ -140,6 +141,6 @@ li.template {
   display: none !important;
 }
 
-@media (max-width: 960px){
+@media (max-width: 800px){
   #clock { display: none; }
 }
