@@ -19,6 +19,10 @@ module SituationRoom
       set :app_user, ENV['SITUATION_ROOM_DASHBOARD_USER']
       set :app_password, ENV['SITUATION_ROOM_DASHBOARD_PASSWORD']
 
+      unless settings.api_endpoint.present?
+        raise "No endpoint has been configured. Make sure the SITUATION_ROOM_API_ENDPOINT environment variable is present."
+      end
+
       if settings.app_user? && settings.app_password?
         use Rack::Auth::Basic, "Please login to this dashboard" do |username, password|
           username == settings.app_user and password == settings.app_password
