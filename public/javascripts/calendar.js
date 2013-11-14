@@ -26,6 +26,8 @@
           $('#loading-status').hide().text("");
         })
         .fail(MeetingRooms.renderError);
+
+      MeetingRooms.scheduleNextRequest(calendarsPath);
     },
     renderGroup: function(group) {
       $('#name').text(group.name);
@@ -69,9 +71,11 @@
     updateClock: function() {
       $('#clock').text( moment().format("h:mma") );
     },
+    scheduleNextRequest: function(path) {
+      window.setTimeout(function() { MeetingRooms.loadCalendars(path); }, 10000);
+    },
     init: function(path) {
       MeetingRooms.loadCalendars(path, true);
-      window.setInterval(function() { MeetingRooms.loadCalendars(path); }, 10000);
     }
   }
 
