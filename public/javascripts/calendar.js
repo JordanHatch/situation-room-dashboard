@@ -55,7 +55,14 @@
         }
       } else {
         newCalendar.removeClass("available").addClass("not-available");
-        newCalendar.find("span.event").text(nextEvent.name);
+        var eventLabel;
+
+        if (nextEvent.visibility == "public") {
+          eventLabel = nextEvent.name;
+        } else {
+          eventLabel = "Not available";
+        }
+        newCalendar.find("span.event").text(eventLabel);
       }
 
       newCalendar.find("h3").text(id);
