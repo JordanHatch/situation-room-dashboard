@@ -37,7 +37,7 @@
 
       var endOfPreviousEvent;
       $.each(room.events, function(i, eventDetails){
-        if (endOfPreviousEvent != null && endOfPreviousEvent !== eventDetails.start_at) {
+        if (endOfPreviousEvent != null && endOfPreviousEvent != eventDetails.start_at) {
           var availableFrom = moment(endOfPreviousEvent).tz("Europe/London");
           var availableUntil = moment(eventDetails.start_at).tz("Europe/London");
           var availableDuration = availableUntil.from(availableFrom, true);
@@ -52,8 +52,17 @@
       });
 
       // insert final 'available' item at end of event list
-      var availableFrom = moment(endOfPreviousEvent).tz("Europe/London");
-      roomDisplay.insertAvailableItem(false, "", availableFrom);
+      // as long as the last item in our current list isn't an "available" item
+      // and the last event ends before the end of the day
+      var finalItem = roomDisplay.roomContainer().find("li:not(.template)").last();
+
+      if (finalItem.attr("class") != "available" &&
+            moment(endOfPreviousEvent).isBefore(moment().endOf('day')) ) {
+
+        var availableFrom = moment(endOfPreviousEvent).tz("Europe/London");
+        roomDisplay.insertAvailableItem(false, "", availableFrom);
+      }
+
     },
     clearRoom: function() {
       roomDisplay.roomContainer().find('li:not(.template)').remove();
@@ -70,9 +79,11 @@
       if (current == true) {
         item.find(".start-time").remove();
 
-        if (duration !== "") {
-          item.find(".duration").text("for " + duration);
+        if (duration == "") {
+          duration = "the rest of the day";
         }
+
+        item.find(".duration").text("for " + duration);
       } else {
         if (duration !== "") {
           item.find("h3").text("Available for "+ duration);
