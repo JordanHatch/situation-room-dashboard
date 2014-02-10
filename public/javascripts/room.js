@@ -101,7 +101,14 @@
       var item = roomDisplay.template().clone();
 
       item.removeClass("template").addClass("not-available");
-      item.find("h3").text(eventDetails.name);
+
+      var eventLabel;
+      if (eventDetails.visibility == "public") {
+        eventLabel = eventDetails.name;
+      } else {
+        eventLabel = "Not available";
+      }
+      item.find("h3").text(eventLabel);
 
       var startAt = moment(eventDetails.start_at).tz("Europe/London").format("H:mm");
       var endAt = moment(eventDetails.end_at).tz("Europe/London").format("H:mm");
