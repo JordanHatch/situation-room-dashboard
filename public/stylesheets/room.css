@@ -1,0 +1,91 @@
+#room {
+  margin: 15px 15px 0;
+}
+
+#room li {
+  background: #222;
+  margin: 0 0 15px 0;
+}
+
+#room li span {
+  display: inline-block;
+}
+#room li span.start-time {
+  width: 120px;
+  height: 70px;
+  padding: 18px 0 0 19px;
+  margin-right: 20px;
+  font-size: 32px;
+  line-height: 37px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+#room li h3 {
+  display: inline-block;
+  font-size: 32px;
+  line-height: 37px;
+  max-height: 37px;
+  overflow: hidden;
+  word-wrap: break-word;
+  width: 75%;
+  vertical-align: middle;
+  padding-top: 4px;
+}
+
+#room li:first-child {
+  padding: 25px;
+  padding-left: 30px;
+}
+
+#room li:first-child span {
+  padding: 0;
+}
+
+#room li:first-child h3 {
+  display: block;
+
+  font-size: 70px;
+  line-height: 90px;
+  margin-bottom: 40px;
+  max-height: none;
+
+  height: 180px;
+  overflow: hidden;
+
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#room li.available:first-child h3 {
+  font-size: 115px;
+  padding: 35px 0;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+#room li:first-child span.duration {
+  font-size: 38px;
+}
+
+#room li.available span.start-time {
+  background: #5bad2e;
+}
+#room li.not-available span.start-time {
+  background: #99150d;
+}
+
+#room li:first-child.not-available {
+  border-left: 20px solid #99150d;
+}
+#room li:first-child.available {
+  border-left: 20px solid #5bad2e;
+}
+#room li.template {
+  display: none !important;
+}
+

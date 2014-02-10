@@ -12,6 +12,10 @@ module SituationRoom
       get_json("/rooms")["rooms"]
     end
 
+    def room(room_number)
+      get_json("/rooms/#{room_number}")
+    end
+
     private
 
     def get_json(path)

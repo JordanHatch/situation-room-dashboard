@@ -1,5 +1,6 @@
 @import url('reset.css');
 @import url('group.css');
+@import url('room.css');
 
 body {
   background: #000;
@@ -80,6 +81,7 @@ header #clock {
   background: #ddd;
   height: auto;
   padding: 10px;
+  margin: 0 0 10px 0;
 }
 #group-selection li a, #group-selection li a:visited {
   color: #000;

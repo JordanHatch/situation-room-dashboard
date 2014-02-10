@@ -6,7 +6,9 @@ require 'active_support/all'
 
 require 'api_client'
 require 'group'
+
 require 'presenters/group_presenter'
+require 'presenters/room_presenter'
 
 module SituationRoom
   class Dashboard < Sinatra::Base
@@ -53,11 +55,28 @@ module SituationRoom
       GroupPresenter.new(@group).present(@rooms).to_json
     end
 
+    get '/api/rooms/:id' do
+      begin
+        @room = situation_room_api.room(params[:id])
+      rescue RestClient::ResourceNotFound
+        halt 404
+      end
+
+      content_type :json
+      RoomPresenter.new(params[:id], @room).present.to_json
+    end
+
     get '/group/:id' do
       @group = Group.find(params[:id])
       not_found unless @group.present?
 
       erb :dashboard
+    end
+
+    get '/rooms/:id' do
+      @room_id = params[:id]
+
+      erb :room
     end
   end
 end

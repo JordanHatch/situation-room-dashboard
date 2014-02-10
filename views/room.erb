@@ -1,0 +1,22 @@
+<header>
+  <h1 class="logo">GDS</h1>
+  <h2 id="name">Meeting room <%= @room_id %></h2>
+  <span id="clock"></span>
+</header>
+
+<ul id="room">
+  <li class="template">
+    <span class="start-time"></span>
+    <h3></h3>
+    <span class="duration"></span>
+  </li>
+</ul>
+<div id="status-container">
+  <div id="loading-status"></div>
+</div>
+
+<script type="text/javascript">
+$( function(){
+  MeetingRooms.roomDisplay.init('/api/rooms/<%= @room_id %>');
+});
+</script>
