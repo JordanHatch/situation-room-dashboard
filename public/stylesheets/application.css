@@ -1,4 +1,5 @@
 @import url('reset.css');
+@import url('group.css');
 
 body {
   background: #000;
@@ -57,6 +58,7 @@ header #clock {
   display: inline-block;
   font-size: 36px;
   padding: 25px;
+  display: none;
 }
 #loading-status.error {
   background: #b10e1e;
@@ -87,60 +89,7 @@ header #clock {
 }
 
 
-#rooms {
-  padding: 10px;
-  display: block;
-  position: relative;
-}
-#rooms.display-columns {
-  -moz-column-width: 49.5%;
-  -moz-column-gap: 0.5%;
-  -moz-column-count: 2;
-  -webkit-column-width: 49.5%;
-  -webkit-column-gap: 0.5%;
-  -webkit-column-count: 2;
-}
 
-li, li h3, li span {
-  height: 60px;
-}
-
-li {
-  display: block;
-  margin: 0 0 10px 0;
-  padding: 0;
-  border: none;
-  background: #222;
-  overflow: hidden;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-
-}
-li h3 {
-  display: inline-block;
-  padding-top: 19px;
-  text-align: center;
-  width: 90px;
-  margin-right: 20px;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-li.available h3 {
-  background: #5bad2e;
-}
-li.not-available h3 {
-  background: #99150d;
-}
-li span {
-  overflow: hidden;
-}
-li.template {
-  display: none !important;
-}
 
 @media (max-width: 740px){
   #clock { display: none; }

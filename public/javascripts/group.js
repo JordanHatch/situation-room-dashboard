@@ -5,15 +5,15 @@
       $ = root.jQuery;
   if(typeof root.MeetingRooms === 'undefined') { root.MeetingRooms = {}; }
 
-  var MeetingRooms = {
+  var groupDisplay = {
     calendarContainer: function() {
       return $("ul#rooms");
     },
     calendarTemplate: function() {
-      return MeetingRooms.calendarContainer().find('li.template');
+      return groupDisplay.calendarContainer().find('li.template');
     },
     clearCalendars: function() {
-      MeetingRooms.calendarContainer().find('li:not(.template)').remove();
+      groupDisplay.calendarContainer().find('li:not(.template)').remove();
     },
     loadCalendars: function(calendarsPath, initial) {
       if (initial == true || $('#loading-status').text() != "") {
@@ -22,27 +22,27 @@
 
       $.getJSON(calendarsPath)
         .done(function(group) {
-          MeetingRooms.renderGroup(group);
+          groupDisplay.renderGroup(group);
           $('#loading-status').hide().text("");
         })
-        .fail(MeetingRooms.renderError);
+        .fail(groupDisplay.renderError);
 
-      MeetingRooms.scheduleNextRequest(calendarsPath);
+      groupDisplay.scheduleNextRequest(calendarsPath);
     },
     renderGroup: function(group) {
       $('#name').text(group.name);
       if (group.display !== null) {
-        MeetingRooms.calendarContainer().attr('class', 'display-'+ group.display);
+        groupDisplay.calendarContainer().attr('class', 'display-'+ group.display);
       }
 
-      MeetingRooms.clearCalendars();
-      MeetingRooms.renderCalendars(group.rooms);
+      groupDisplay.clearCalendars();
+      groupDisplay.renderCalendars(group.rooms);
     },
     renderCalendars: function(calendars) {
-      $.each(calendars, MeetingRooms.renderCalendar);
+      $.each(calendars, groupDisplay.renderCalendar);
     },
     renderCalendar: function(id, calendar) {
-      var newCalendar = MeetingRooms.calendarTemplate().clone()
+      var newCalendar = groupDisplay.calendarTemplate().clone()
                           .removeClass("template");
       var nextEvent = calendar.events[0];
 
@@ -66,26 +66,19 @@
       }
 
       newCalendar.find("h3").text(id);
-      newCalendar.insertBefore(MeetingRooms.calendarTemplate());
+      newCalendar.insertBefore(groupDisplay.calendarTemplate());
     },
     renderError: function() {
-      MeetingRooms.clearCalendars();
+      groupDisplay.clearCalendars();
       $("#loading-status").text("Error loading calendars. Trying again in a few seconds.").attr("class","error").show();
     },
-    initializeClock: function() {
-      window.setInterval(MeetingRooms.updateClock, 100);
-    },
-    updateClock: function() {
-      $('#clock').text( moment().format("h:mma") );
-    },
     scheduleNextRequest: function(path) {
-      window.setTimeout(function() { MeetingRooms.loadCalendars(path); }, 10000);
+      window.setTimeout(function() { groupDisplay.loadCalendars(path); }, 10000);
     },
     init: function(path) {
-      MeetingRooms.loadCalendars(path, true);
+      groupDisplay.loadCalendars(path, true);
     }
   }
 
-  MeetingRooms.initializeClock();
-  root.MeetingRooms = MeetingRooms;
+  root.MeetingRooms.groupDisplay = groupDisplay;
 }).call(this);
