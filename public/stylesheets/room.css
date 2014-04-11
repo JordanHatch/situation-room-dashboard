@@ -51,9 +51,8 @@
   font-size: 70px;
   line-height: 90px;
   margin-bottom: 40px;
-  max-height: none;
-
-  height: 180px;
+  min-height: 90px;
+  max-height: 180px;
   overflow: hidden;
 
 
@@ -88,4 +87,3 @@
 #room li.template {
   display: none !important;
 }
-
