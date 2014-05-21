@@ -42,19 +42,6 @@ module SituationRoom
       end
     end
 
-    get '/' do
-      @groups = Group.all
-      erb :index
-    end
-
-    get '/api/group/:id' do
-      @rooms = situation_room_api.rooms
-      @group = Group.find(params[:id])
-
-      content_type :json
-      GroupPresenter.new(@group).present(@rooms).to_json
-    end
-
     get '/api/rooms/:id' do
       begin
         @room = situation_room_api.room(params[:id])
@@ -66,18 +53,29 @@ module SituationRoom
       RoomPresenter.new(params[:id], @room).present.to_json
     end
 
-    get '/group/:id' do
+    get '/api/dashboards/:id' do
+      @rooms = situation_room_api.rooms
+      @group = Group.find(params[:id])
+
+      content_type :json
+      GroupPresenter.new(@group).present(@rooms).to_json
+    end
+
+    get '/dashboards/rooms/:id' do
+      @room_id = params[:id]
+      erb :'dashboards/room', layout: :'dashboards/layout'
+    end
+
+    get '/dashboards' do
+      @groups = Group.all
+      erb :'dashboards/index', layout: :'dashboards/layout'
+    end
+
+    get '/dashboards/:id' do
       @group = Group.find(params[:id])
       not_found unless @group.present?
 
-      erb :dashboard
-    end
-
-    get '/rooms/:id' do
-      @room_id = params[:id]
-
-      erb :room
+      erb :'dashboards/show', layout: :'dashboards/layout'
     end
   end
 end
-
