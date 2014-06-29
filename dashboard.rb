@@ -5,6 +5,7 @@ require 'sinatra/base'
 require 'active_support/all'
 
 require 'api_client'
+require 'dashboard_config'
 require 'group'
 
 require 'presenters/group_presenter'
@@ -14,6 +15,8 @@ require 'decorators/event_decorator'
 require 'decorators/room_decorator'
 
 module SituationRoom
+  mattr_accessor :dashboard_config
+
   class Dashboard < Sinatra::Base
 
     configure do
@@ -23,6 +26,8 @@ module SituationRoom
 
       set :app_user, ENV['SITUATION_ROOM_DASHBOARD_USER']
       set :app_password, ENV['SITUATION_ROOM_DASHBOARD_PASSWORD']
+
+      SituationRoom.dashboard_config = DashboardConfig.load_from_remote(ENV['SITUATION_ROOM_CONFIG_URI'])
 
       unless settings.api_endpoint.present?
         raise "No endpoint has been configured. Make sure the SITUATION_ROOM_API_ENDPOINT environment variable is present."

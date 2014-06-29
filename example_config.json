@@ -1,0 +1,21 @@
+{
+  "rooms": {
+    "303": {
+      "name": "User research lab",
+      "short_name": "Lab",
+      "show_as_available": false,
+      "not_available_label": "Not open"
+    },
+    "304": {
+      "name": "Meeting room 304",
+      "short_name": "304",
+      "show_as_available": true
+    }
+  },
+  "dashboards": {
+    "3rd-floor": {
+      "name": "3rd floor meeting rooms",
+      "rooms": ["303", "304"]
+    }
+  }
+}

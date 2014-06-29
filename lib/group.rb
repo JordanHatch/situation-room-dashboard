@@ -1,14 +1,12 @@
 module SituationRoom
   class Group
 
-    attr_accessor :id, :name, :display, :calendars
+    attr_accessor :id, :name, :rooms
 
     def initialize(atts)
       @id = atts[:id]
       @name = atts[:name]
-      @display = atts[:display]
-      @calendars = atts[:calendars]
-      @show_all = atts[:show_all] || false
+      @rooms = atts[:rooms]
     end
 
     def self.all
@@ -27,26 +25,7 @@ module SituationRoom
 
     private
     def self.groups
-      @@groups ||= self.parse_config
-    end
-
-    def self.parse_config
-      JSON.parse(user_config_or_fallback)["groups"]
-    end
-
-    def self.user_config_or_fallback
-      ENV["SITUATION_ROOM_CONFIG"] || self.fallback_config
-    end
-
-    def self.fallback_config
-      {
-        "groups" => {
-          "all" => {
-            "name" => "All meeting rooms",
-            "show_all" => true
-          }
-        }
-      }.to_json
+      @@groups ||= SituationRoom.dashboard_config.dashboards
     end
 
   end
