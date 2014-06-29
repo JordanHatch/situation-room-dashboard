@@ -7,6 +7,9 @@ require 'active_support/all'
 require 'api_client'
 require 'dashboard_config'
 require 'group'
+require 'room'
+
+require 'repositories/room_repository'
 
 require 'presenters/group_presenter'
 require 'presenters/room_presenter'
@@ -62,17 +65,18 @@ module SituationRoom
 
     get '/api/rooms/:id' do
       begin
-        @room = situation_room_api.room(params[:id])
+        response = situation_room_api.room(params[:id])
+        @room = RoomRepository.from_single_api_response(params[:id], response)
       rescue RestClient::ResourceNotFound
         halt 404
       end
 
       content_type :json
-      RoomPresenter.new(params[:id], @room).present.to_json
+      RoomPresenter.new(@room).present.to_json
     end
 
     get '/api/dashboards/:id' do
-      @rooms = situation_room_api.rooms
+      @rooms = RoomRepository.from_api_response(situation_room_api.rooms)
       @group = Group.find(params[:id])
 
       content_type :json
