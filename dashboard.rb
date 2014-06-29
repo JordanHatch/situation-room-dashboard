@@ -95,5 +95,10 @@ module SituationRoom
 
       erb :'dashboards/show', layout: :'dashboards/layout'
     end
+
+    # Redirect for old dashboard route
+    get '/group/:id' do
+      redirect "/dashboards/#{params[:id]}"
+    end
   end
 end
