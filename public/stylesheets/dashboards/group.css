@@ -1,9 +1,9 @@
-#rooms {
+body.dashboard #rooms {
   padding: 10px;
   display: block;
   position: relative;
 }
-#rooms.display-columns {
+body.dashboard #rooms.display-columns {
   -moz-column-width: 49.5%;
   -moz-column-gap: 0.5%;
   -moz-column-count: 2;

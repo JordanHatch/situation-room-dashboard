@@ -1,0 +1,93 @@
+body {
+  background: #000;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 27px;
+}
+
+body header {
+  background: #fff;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+body header h1 {
+  display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  background: #2b8cc4;
+  font-weight: 300;
+  color: #fff;
+  width: auto;
+  margin-right: 20px;
+  width: 100px;
+  height: 80px;
+  text-align: center;
+  padding-top: 26px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body header h2 {
+  display: inline;
+  color: #000;
+  font-size: 32px;
+  overflow: hidden;
+}
+
+header #clock {
+  position: absolute;
+  right: 40px;
+  top: 26px;
+  font-size: 32px;
+  color: #000;
+}
+
+#status-container {
+  text-align: center;
+}
+#loading-status {
+  text-align: center;
+  display: inline-block;
+  font-size: 36px;
+  padding: 25px;
+  display: none;
+}
+#loading-status.error {
+  background: #b10e1e;
+  color: #fff;
+}
+
+#group-selection {
+  width: 600px;
+  display: block;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  color: #000;
+}
+#group-selection h2 {
+  margin-bottom: 15px;
+}
+#group-selection li {
+  background: #ddd;
+  height: auto;
+  padding: 10px;
+  margin: 0 0 10px 0;
+}
+#group-selection li a, #group-selection li a:visited {
+  color: #000;
+}
+#group-selection li a:hover, #group-selection li a:active {
+  color: #444;
+}
+
+
+
+
+@media (max-width: 740px){
+  #clock { display: none; }
+}
