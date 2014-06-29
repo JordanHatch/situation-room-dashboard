@@ -26,6 +26,8 @@
     renderRoom: function(room) {
       roomDisplay.clearRoom();
 
+      $('h2#name').text(room.name);
+
       if (room.available) {
         var duration = "";
         if (room.available_until !== null) {
