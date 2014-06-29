@@ -11,7 +11,9 @@ module SituationRoom
         events: @room.events,
         available: @room.available,
         next_available: @room.next_available,
-        available_until: @room.available_until
+        available_until: @room.available_until,
+        show_as_available: @room.show_as_available,
+        not_available_label: @room.not_available_label,
       }
     end
   end
