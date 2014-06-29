@@ -49,7 +49,7 @@
       if (calendar.available == true)  {
         newCalendar.find("span.availability").text("Available");
 
-        if (calendar.available_until !== undefined) {
+        if (calendar.available_until !== null) {
           var availableUntil = moment(calendar.available_until).tz("Europe/London");
           newCalendar.find("span.availability").text("Available until "+ availableUntil.format("h:mma"));
         }
@@ -65,7 +65,7 @@
         newCalendar.find("span.event").text(eventLabel);
       }
 
-      newCalendar.find("h3").text(id);
+      newCalendar.find("h3").text(calendar.short_name);
       newCalendar.insertBefore(groupDisplay.calendarTemplate());
     },
     renderError: function() {
