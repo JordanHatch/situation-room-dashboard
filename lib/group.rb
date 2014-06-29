@@ -19,10 +19,6 @@ module SituationRoom
       self.all.find {|g| g.id == id }
     end
 
-    def show_all?
-      @show_all
-    end
-
     private
     def self.groups
       @@groups ||= SituationRoom.dashboard_config.dashboards
