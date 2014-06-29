@@ -1,0 +1,32 @@
+<section id="available" class="room-list">
+  <h1>Available now</h1>
+  <ul>
+    <% @available_rooms.each do |room| %>
+      <li class="room">
+        <h2><%= room.name %></h2>
+        <p class="current">
+          Available <% if room.available_until %>until <%= room.available_until %><% end %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<section id="in-use" class="room-list">
+  <h1>Currently in use</h1>
+  <ul>
+    <% @unavailable_rooms.each do |room| %>
+      <li class="room">
+        <h2><%= room.name %></h2>
+        <p class="current">
+          <%= room.events.first.name %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+
+<pre>
+  <% @rooms %>
+</pre>

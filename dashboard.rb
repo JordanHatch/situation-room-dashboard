@@ -10,6 +10,9 @@ require 'group'
 require 'presenters/group_presenter'
 require 'presenters/room_presenter'
 
+require 'decorators/event_decorator'
+require 'decorators/room_decorator'
+
 module SituationRoom
   class Dashboard < Sinatra::Base
 
@@ -40,6 +43,16 @@ module SituationRoom
 
         @client ||= ApiClient.new(settings.api_endpoint, options)
       end
+    end
+
+    get '/' do
+      @rooms = situation_room_api.rooms.map {|name, room|
+        RoomDecorator.new(name, room)
+      }
+      @available_rooms = @rooms.select {|r| r.available == true }
+      @unavailable_rooms = @rooms.select {|r| r.available == false }
+
+      erb :index
     end
 
     get '/api/rooms/:id' do

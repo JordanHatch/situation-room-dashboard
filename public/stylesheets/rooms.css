@@ -1,0 +1,38 @@
+.room-list {
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+}
+
+.room-list h1 {
+  font-weight: normal;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.room-list > ul {
+
+}
+.room-list li.room {
+  display: block;
+  padding: 10px 0 10px 16px;
+  margin-bottom: 5px;
+  border-left: 8px solid #ddd;
+}
+
+.room-list li.room h2 {
+  font-size: 45px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.room-list li.room .current {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.room-list#available li.room {
+  border-color: #5bad2e;
+}
+.room-list#in-use li.room {
+  border-color: #99150d;
+}
