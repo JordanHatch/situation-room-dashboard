@@ -47,14 +47,24 @@
       var nextEvent = calendar.events[0];
 
       if (calendar.available == true)  {
-        newCalendar.find("span.availability").text("Available");
+        if (calendar.show_as_available == true) {
+          newCalendar.find("span.availability").text("Available");
 
-        if (calendar.available_until !== null) {
-          var availableUntil = moment(calendar.available_until).tz("Europe/London");
-          newCalendar.find("span.availability").text("Available until "+ availableUntil.format("h:mma"));
+          if (calendar.available_until !== null) {
+            var availableUntil = moment(calendar.available_until).tz("Europe/London");
+            newCalendar.find("span.availability").text("Available until "+ availableUntil.format("h:mma"));
+          }
+        } else {
+          newCalendar.removeClass("available").addClass("not-in-use");
+          newCalendar.find("span.availability").text(calendar.not_available_label);
         }
       } else {
-        newCalendar.removeClass("available").addClass("not-available");
+        if (calendar.show_as_available == true) {
+          newCalendar.removeClass("available").addClass("not-available");
+        } else {
+          newCalendar.removeClass("available").addClass("in-use");
+        }
+
         var eventLabel;
 
         if (nextEvent.visibility == "public") {

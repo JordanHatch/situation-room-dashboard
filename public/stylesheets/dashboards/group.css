@@ -46,6 +46,12 @@ ul#rooms li.available h3 {
 ul#rooms li.not-available h3 {
   background: #99150d;
 }
+ul#rooms li.not-in-use h3 {
+  background: #929191;
+}
+ul#rooms li.in-use h3 {
+  background: #2b8cc4;
+}
 ul#rooms li span {
   overflow: hidden;
 }

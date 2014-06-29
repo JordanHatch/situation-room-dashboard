@@ -34,7 +34,11 @@
           duration = moment(room.available_until).tz("Europe/London").fromNow(true);
         }
 
-        roomDisplay.insertAvailableItem(true, duration);
+        if (room.show_as_available) {
+          roomDisplay.insertAvailableItem(true, duration);
+        } else {
+          roomDisplay.insertNotInUseItem(true, room.not_available_label);
+        }
       }
 
       var endOfPreviousEvent;
@@ -62,7 +66,12 @@
             moment(endOfPreviousEvent).isBefore(moment().endOf('day')) ) {
 
         var availableFrom = moment(endOfPreviousEvent).tz("Europe/London");
-        roomDisplay.insertAvailableItem(false, "", availableFrom);
+
+        if (room.show_as_available) {
+          roomDisplay.insertAvailableItem(false, "", availableFrom);
+        } else {
+          roomDisplay.insertNotInUseItem(false, room.not_available_label, availableFrom);
+        }
       }
 
     },
@@ -99,10 +108,32 @@
         item.insertBefore(roomDisplay.template());
       }
     },
-    insertEventItem: function(current, eventDetails) {
+    insertNotInUseItem: function(current, label, startAt) {
       var item = roomDisplay.template().clone();
 
-      item.removeClass("template").addClass("not-available");
+      item.removeClass("template").addClass("not-in-use");
+      item.find("h3").text(label);
+
+      if (current == true) {
+        item.find(".start-time").remove();
+      } else {
+        item.find(".start-time").text(startAt.format("H:mm"));
+        item.find(".duration").remove();
+      }
+
+      if (!roomDisplay.listAtMaximumLength()) {
+        item.insertBefore(roomDisplay.template());
+      }
+    },
+    insertEventItem: function(current, eventDetails, showAsAvailable) {
+      var item = roomDisplay.template().clone();
+
+      if (showAsAvailable == true) {
+        item.removeClass("template").addClass("not-available");
+      } else {
+        item.removeClass("template").addClass("in-use");
+      }
+
 
       var eventLabel;
       if (eventDetails.visibility == "public") {

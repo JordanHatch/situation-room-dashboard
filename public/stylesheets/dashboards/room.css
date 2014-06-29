@@ -77,6 +77,12 @@
 #room li.not-available span.start-time {
   background: #99150d;
 }
+#room li.not-in-use span.start-time {
+  background: #929191;
+}
+#room li.in-use span.start-time {
+  background: #2b8cc4;
+}
 
 #room li:first-child.not-available {
   border-left: 20px solid #99150d;
@@ -84,6 +90,13 @@
 #room li:first-child.available {
   border-left: 20px solid #5bad2e;
 }
+#room li:first-child.not-in-use {
+  border-left: 20px solid #929191;
+}
+#room li:first-child.in-use {
+  border-left: 20px solid #2b8cc4;
+}
+
 #room li.template {
   display: none !important;
 }
