@@ -67,7 +67,7 @@ module SituationRoom
       begin
         response = situation_room_api.room(params[:id])
         @room = RoomRepository.from_single_api_response(params[:id], response)
-      rescue RestClient::ResourceNotFound
+      rescue RestClient::ResourceNotFound, RoomRepository::UndefinedRoom => e
         halt 404
       end
 

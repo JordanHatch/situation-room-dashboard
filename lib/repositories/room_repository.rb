@@ -1,9 +1,16 @@
 module SituationRoom
   class RoomRepository
+
+    class UndefinedRoom < StandardError; end
+
     def self.from_api_response(rooms)
       rooms.map {|id, room|
-        build_room_from_response(id, room)
-      }
+        begin
+          build_room_from_response(id, room)
+        rescue UndefinedRoom
+          nil
+        end
+      }.compact
     end
 
     def self.from_single_api_response(id, room)
@@ -15,10 +22,15 @@ module SituationRoom
     def self.build_room_from_response(id, room)
       atts = { id: id }
 
-      atts.merge!(room)
-      atts.merge!(SituationRoom.dashboard_config.rooms[id])
+      room_config = SituationRoom.dashboard_config.rooms[id]
 
-      Room.new(atts.symbolize_keys)
+      if room_config.blank?
+        raise UndefinedRoom
+      end
+
+      atts.merge!(room).merge!(room_config).symbolize_keys!
+
+      Room.new(atts)
     end
   end
 end
