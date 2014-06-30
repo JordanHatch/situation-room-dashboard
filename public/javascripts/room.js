@@ -52,7 +52,7 @@
         }
 
         var current = ! room.available && endOfPreviousEvent == null;
-        roomDisplay.insertEventItem(current, eventDetails);
+        roomDisplay.insertEventItem(current, eventDetails, room.show_as_available);
 
         endOfPreviousEvent = eventDetails.end_at;
       });
