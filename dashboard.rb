@@ -8,6 +8,7 @@ require 'api_client'
 require 'dashboard_config'
 require 'group'
 require 'room'
+require 'monitor_notifier'
 
 require 'repositories/room_repository'
 
@@ -71,6 +72,8 @@ module SituationRoom
         halt 404
       end
 
+      notify_monitor(params[:id])
+
       content_type :json
       RoomPresenter.new(@room).present.to_json
     end
@@ -103,6 +106,10 @@ module SituationRoom
     # Redirect for old dashboard route
     get '/group/:id' do
       redirect "/dashboards/#{params[:id]}"
+    end
+
+    def notify_monitor(room)
+      MonitorNotifier.notify(room)
     end
   end
 end
