@@ -67,7 +67,8 @@
 
         var eventLabel;
 
-        if (nextEvent.visibility == "public") {
+        // if (nextEvent.visibility == "public") {
+        if (calendar.show_as_available == false) {
           eventLabel = nextEvent.name;
         } else {
           eventLabel = "Not available";
