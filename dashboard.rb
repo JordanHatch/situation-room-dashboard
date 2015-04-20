@@ -31,6 +31,8 @@ module SituationRoom
       set :app_user, ENV['SITUATION_ROOM_DASHBOARD_USER']
       set :app_password, ENV['SITUATION_ROOM_DASHBOARD_PASSWORD']
 
+      set :protection, :except => :frame_options
+
       SituationRoom.dashboard_config = DashboardConfig.load_from_remote(ENV['SITUATION_ROOM_CONFIG_URI'])
 
       unless settings.api_endpoint.present?
